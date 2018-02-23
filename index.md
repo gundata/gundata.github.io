@@ -1,23 +1,3 @@
-
-
-```python
-%pylab inline
-
-import math
-import matplotlib.pyplot as plt 
-import pandas as pd
-from sklearn import datasets, linear_model
-from sklearn.metrics import mean_squared_error, r2_score
-
-
-plt.style.use('ggplot')
-pylab.rcParams['figure.figsize'] = (5.0, 5.0)
-data = pd.read_excel("combined.xls")
-```
-
-    Populating the interactive namespace from numpy and matplotlib
-    
-
 # About this project
 
 There is a lot of misinformation about guns in the media coming from both sides of the aisle. It's hard to get unbiased information from any one source - but luckily for us, data doesn't lie.
@@ -42,53 +22,7 @@ There has been a [lot](https://www.vox.com/policy-and-politics/2018/2/21/1702893
 
 The data suggests otherwise.
 
-
-
-```python
-plt.subplot(211)
-plt.plot(data['year'], data['usa.guns.rate'], 'g-', label='Civilian firearms')
-plt.ylabel('Civilian firearm ownership, per person', fontsize=8)
-plt.title("Fig 1a. Gun ownership vs firearm homicides, over time, USA", fontsize=12, y=1.08)
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.xlim(1995, 2016)
-plt.subplot(212)
-plt.plot(data['year'], data['usa.homicide.firearms.total'], label='Firearm homicides')
-plt.ylabel('Firearm homicides, per 100k people', fontsize=8)
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.xlim(1995, 2016)
-plt.text(1992, 1.5, "Source: FBI Uniform Crime Reporting: https://ucr.fbi.gov/ucr-publications")
-plt.text(1992, 1, "Source: Congressional Research Service: https://fas.org/sgp/crs/misc/RL32842.pdf")
-plt.text(1992, 0.5, "Source: Hill, 2013:https://engagedscholarship.csuohio.edu/cgi/viewcontent.cgi?article=1679&context=urban_facpub")
-plt.show()
-```
-
-
 ![png](output_3_0.png)
-
-
-
-```python
-x = data['usa.guns.rate']
-y = data['usa.homicide.firearms.total']
-z = data['year']
-regr = linear_model.LinearRegression()
-fit = regr.fit(x.reshape(-1, 1), y.reshape(-1, 1))
-y_pred = regr.predict(x.reshape(-1, 1))
-
-plt.plot(x, y, 'go')
-plt.plot(x, y_pred, 'b--')
-plt.title("Fig 1b. Inverse relationship between number of civilian guns and homicides", fontsize=12, y=1.05)
-plt.ylabel("Firearm homicides per 100k people", fontsize=8)
-plt.xlabel("Firearms per person", fontsize=8)
-
-# annotate r-squared value
-plt.text(0.9, 3.5, 'R²: {0}'.format(regr.score(x.reshape(-1,1), y.reshape(-1,1)).round(2)), color='blue')
-# annotate first and last three years
-for i in [0, 1, 2, len(x)-3, len(x)-2, len(x)-1]:
-    plt.text(x[i] + 0.01, y[i] + 0.01, z[i])
-plt.show()
-```
-
 
 ![png](output_4_0.png)
 
@@ -98,20 +32,6 @@ plt.show()
 The rate of rifle homicides (including so-called "assault rifles") has dropped even quicker than general homicide rate. Despite all of the furor raised over civilian ownership of "assault rifles", less than 400 people have been killed with rifles (hunting, military, semiautomatic, etc) for the last 10 years.
 
 The answer seems to be no. The overwhelming majority of homicides committed with firearms involve handguns.
-
-
-```python
-plt.plot(data['year'], data['usa.homicide.firearms.rifles'])
-plt.title('Fig 2a. Homicide rate, rifles, US', fontsize=12, y=1.05)
-plt.show()
-
-pos = np.arange(len(data['year'])) + .5
-bars = plt.barh(pos, data['usa.fbi.firearms.rifles'], align='center')
-plt.title('Fig 2b. Total people killed with rifles in the US', fontsize=12, y=1.05)
-plt.yticks(pos, data['year'], fontsize=10)
-plt.ylim(0, len(data['year']))
-plt.show()
-```
 
 
 ![png](output_6_0.png)
@@ -168,41 +88,4 @@ In these cases, a total of 267 people were killed. 85 (25%, expected: 11%) of th
 
 Looking at the data, there is an increase in the number of victims of mass shootings, and the percentage of gun homicides from mass shootings. However, this increase is relatively small (accounting for approximately 0.5% of gun homicides), and is significantly smaller than the increase in defensive gun use by citizens
 
-
-```python
-x = data['year']
-y = data['usa.mass_shootings.fatalities'] / data['usa.fbi.firearms.total'] * 100
-z = data['usa.justifiable.firearms.total']  / data['usa.fbi.firearms.total'] * 100
-
-
-
-regr = linear_model.LinearRegression()
-fit = regr.fit(x.reshape(-1,1), z.reshape(-1,1))
-z_pred = regr.predict(x.reshape(-1, 1))
-plt.plot(x, z, 'bo', label='Percent of gun homicides that are justifiable')
-plt.plot(x, z_pred, 'b--')
-plt.text(1995, 2.5, 'R²: {0}'.format(regr.score(x.reshape(-1,1), z.reshape(-1,1)).round(2)), color='blue')
-
-regr = linear_model.LinearRegression()
-fit = regr.fit(x.reshape(-1,1), y.reshape(-1,1))
-y_pred = regr.predict(x.reshape(-1, 1))
-plt.plot(x, y, 'ro', label='Percent of gun homicides from mass shootings')
-plt.plot(x, y_pred, 'r--')
-plt.text(1995, 0.3, 'R²: {0}'.format(regr.score(x.reshape(-1,1), y.reshape(-1,1)).round(2)), color='red')
-
-plt.title('Fig 3. Defensive gun use vs mass shootings', y=1.05)
-plt.ylabel('Percent of gun homicides', fontsize=10)
-plt.xlim(1994, 2017)
-plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-plt.show()
-
-```
-
-
 ![png](output_9_0.png)
-
-
-
-```python
-
-```

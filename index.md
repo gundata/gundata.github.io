@@ -14,6 +14,9 @@ Before we get to the graphs and data, lets go over some definitions.
 
 All analyses are performed on data that is publically available, from reputable sources - typically government agencies, or the World Bank. Where I believe the sources are more spurious, I will tell you.
 
+[Download the data (.xls)](https://github.com/gundata/Gat-Facts/raw/master/combined.xls)
+
+
 ## Gun Crime in the United States
 
 Both gun homicides, and general homicides have experienced steep declines since 1995. Rates of gun homicides dropped 50% from the high of 1995 to the low of 2014, and have only slightly rebounded since then, mirroring the overall homicide trend in the United States.

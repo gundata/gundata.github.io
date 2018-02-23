@@ -16,6 +16,7 @@ All analyses are performed on data that is publically available, from reputable 
 
 [Download the data (.xls)](https://github.com/gundata/Gat-Facts/raw/master/combined.xls)
 
+[View the code that generates the graphs](https://github.com/gundata/Gat-Facts) 
 
 ## Gun Crime in the United States
 
